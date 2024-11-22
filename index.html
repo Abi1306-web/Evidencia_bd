@@ -3,39 +3,48 @@
 <head>
     <title>EVIDENCIA BD</title>
     <style>
-        /* Estilos CSS aquí */
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        /* ... */
+        /* Estilos CSS (igual que en el ejemplo anterior) */
     </style>
 </head>
 <body>
-    <h1>Bienvenido a mi Aplicación</h1>
-    <p>Selecciona una opción:</p>
-    <button onclick="mostrarTabla('proveedores')">Proveedores</button>
-    <button onclick="mostrarTabla('clientes')">Clientes</button>
-    <button onclick="mostrarTabla('pedidos')">Pedidos</button>
+    <h1>Tabla de Proveedores</h1>
 
-    <div id="tabla-container"></div>
+    <table id="tabla-proveedores">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Teléfono</th>
+                <th>Producto</th>
+            </tr>
+        </thead>
+        <tbody id="tbody-proveedores">
+        </tbody>
+    </table>
 
     <script>
-        function mostrarTabla(tabla) {
-            const container = document.getElementById('tabla-container');
-            container.innerHTML = ''; // Limpiamos el contenedor antes de mostrar la nueva tabla
+        // Datos de los proveedores (puedes personalizarlos)
+        const proveedores = [
+            { id: 1, nombre: 'Proveedor 1', telefono: '1234567890', producto: 'Producto A' },
+            // ... otros 19 objetos con los datos de los proveedores
+        ];
 
-            let tablaHTML = '<table><tr><th>ID</th><th>Nombre</th><th>Teléfono</th><th>Producto</th></tr>';
-            // Aquí deberías tener lógica para generar la tabla según el valor de 'tabla'
-            // Por ejemplo, si tabla === 'proveedores':
-            if (tabla === 'proveedores') {
-                tablaHTML += '<tr><td>1</td><td>Proveedor 1</td><td>1234567890</td><td>Producto A</td></tr>';
-            }
-            // ... y así para las otras tablas
-
-            tablaHTML += '</table>';
-            container.innerHTML = tablaHTML;
+        // Función para crear una fila en la tabla
+        function crearFila(proveedor) {
+            const fila = document.createElement('tr');
+            const celdaId = document.createElement('td');
+            celdaId.textContent = proveedor.id;
+            // ... crear las demás celdas de la fila
+            fila.appendChild(celdaId);
+            // ... agregar las demás celdas a la fila
+            return fila;
         }
+
+        // Agregar las filas a la tabla
+        const tbody = document.getElementById('tbody-proveedores');
+        proveedores.forEach(proveedor => {
+            tbody.appendChild(crearFila(proveedor));
+        });
     </script>
 </body>
 </html>
